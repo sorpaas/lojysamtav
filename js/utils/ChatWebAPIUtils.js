@@ -1,6 +1,6 @@
 var ChatServerActionCreators = require('../actions/ChatServerActionCreators');
-var $ = require('jquery')
-var API_SERVER = "http://localhost:8080/";
+var $ = require('jquery');
+var API_SERVER = "http://localhost:8000/";
 
 module.exports = {
 
@@ -20,8 +20,53 @@ module.exports = {
   },
 
   createMessage: function(message, threadName) {
-    // simulate writing to a database
-    var rawMessages = JSON.parse(localStorage.getItem('messages'));
+    function makeid()
+    {
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+      for( var i=0; i < 5; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+      return text;
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: API_SERVER + "ask",
+      data: { question: message.text }
+    }).done(function(data) {
+      if(data.error) {
+        ChatServerActionCreators.receiveAll([{
+          id: makeid(),
+          threadID: 't_1',
+          threadName: 'tavla la .logysamsef.',
+          authorName: 'la .logysamsef.',
+          text: ".i na go'i",
+          timestamp: Date.now()
+        }]);
+      } else {
+        ChatServerActionCreators.receiveAll([{
+          id: makeid(),
+          threadID: 't_1',
+          threadName: 'tavla la .logysamsef.',
+          authorName: 'la .logysamsef.',
+          text: data.result,
+          timestamp: Date.now()
+        }]);
+      }
+      console.log(data);
+    }).fail(function() {
+      ChatServerActionCreators.receiveAll([{
+        id: makeid(),
+        threadID: 't_1',
+        threadName: 'tavla la .logysamsef.',
+        authorName: 'la .logysamsef.',
+        text: ".i na go'i",
+        timestamp: Date.now()
+      }]);
+    });
+
     var timestamp = Date.now();
     var id = 'm_' + timestamp;
     var threadID = message.threadID || ('t_' + Date.now());
@@ -33,8 +78,6 @@ module.exports = {
       text: message.text,
       timestamp: timestamp
     };
-    rawMessages.push(createdMessage);
-    localStorage.setItem('messages', JSON.stringify(rawMessages));
 
     // simulate success callback
     setTimeout(function() {
