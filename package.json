@@ -1,8 +1,8 @@
 {
-  "name": "flux-chat",
-  "version": "0.0.2",
-  "description": "Example Flux chat application primarily intended to explain the use of Dispatcher.waitFor().",
-  "repository": "https://github.com/facebook/flux",
+  "name": "lojysamtav",
+  "version": "0.0.1",
+  "description": "The Chat Frontend for lojysamsef.",
+  "repository": "https://github.com/sorpaas/lojysamtav",
   "main": "js/app.js",
   "dependencies": {
     "flux": "^2.0.0",
@@ -21,7 +21,7 @@
     "build": "NODE_ENV=production browserify . | uglifyjs -cm > js/bundle.min.js",
     "test": "jest"
   },
-  "author": "Bill Fisher",
+  "author": "sorpa'as plat",
   "browserify": {
     "transform": [
       "reactify",
