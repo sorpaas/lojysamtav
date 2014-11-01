@@ -92,7 +92,7 @@ var MessageStore = merge(EventEmitter.prototype, {
     return {
       id: 'm_' + timestamp,
       threadID: ThreadStore.getCurrentID(),
-      authorName: 'Bill', // hard coded for the example
+      authorName: 'lo prenu', // hard coded for the example
       date: new Date(timestamp),
       text: text,
       isRead: true
