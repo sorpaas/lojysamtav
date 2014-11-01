@@ -6,7 +6,7 @@ var ChatApp = React.createClass({
 
   render: function() {
     return (
-      <div className="lojysamtav">
+      <div className="chatapp">
         <ThreadSection />
         <MessageSection />
       </div>
