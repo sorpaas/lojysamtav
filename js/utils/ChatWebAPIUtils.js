@@ -1,5 +1,5 @@
 var ChatServerActionCreators = require('../actions/ChatServerActionCreators');
-
+var $ = require('jquery')
 var API_SERVER = "http://localhost:8080/";
 
 module.exports = {
